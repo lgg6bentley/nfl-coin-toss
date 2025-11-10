@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NFL Coin Toss</title>
+    <link href="./dist/output.css" rel="stylesheet" />
+    <style>
+      .coin {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 1s ease-in-out;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+      }
+      .flip {
+        transform: rotateY(1800deg);
+      }
+    </style>
+    <script>
+      function tossCoin() {
+        const coin = document.getElementById("coin");
+        const result = document.getElementById("result");
+
+        coin.classList.add("flip");
+
+        setTimeout(() => {
+          coin.classList.remove("flip");
+
+          const isHeads = Math.random() < 0.5;
+          const headsURL = "https://www.pngkey.com/png/full/146-1464786_400px-circle-quarter-heads-side-of-coin.png";
+          const tailsURL = "https://clipart-library.com/images_k/quarter-transparent-background/quarter-transparent-background-4.png";
+
+          coin.style.backgroundImage = `url('${isHeads ? headsURL : tailsURL}')`;
+          result.textContent = isHeads ? "Heads – Receive" : "Tails – Defer";
+        }, 1000);
+      }
+    </script>
+  </head>
+  <body class="bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center justify-center min-h-screen space-y-8">
+    <h1 class="text-5xl font-extrabold text-red-600 uppercase tracking-wide">NFL Coin Toss</h1>
+    <p class="text-lg text-gray-300 italic">The ritual before kickoff begins...</p>
+    <div id="coin" class="coin"
+         style="background-image: url('https://www.pngkey.com/png/full/146-1464786_400px-circle-quarter-heads-side-of-coin.png');">
+    </div>
+    <button onclick="tossCoin()" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full shadow-xl transition duration-300 uppercase tracking-wider">
+      Flip the Coin
+    </button>
+    <div id="result" class="text-3xl font-semibold text-yellow-400 mt-4"></div>
+    <footer class="text-sm text-gray-500 mt-12">Powered by Tailwind • Ritualized by Bentley</footer>
+  </body>
+</html>
